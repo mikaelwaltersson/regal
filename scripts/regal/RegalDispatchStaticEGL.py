@@ -58,14 +58,14 @@ def apiStaticEGLFuncInitCode(apis, args):
           name   = function.name
           code += '  tbl.r%s = ::%s;\n' % ( name, name )
 
-      code += "\n#if !REGAL_SYS_EMSCRIPTEN\n"
+      code += "\n#if !(REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)\n"
 
       for function in api.functions:
         if "KHR" in function.name or "NV" in function.name or "MESA" in function.name or "ANGLE" in function.name:
           name   = function.name
           code += '  tbl.r%s = ::%s;\n' % ( name, name )
 
-      code += "#endif // !REGAL_SYS_EMSCRIPTEN\n"
+      code += "#endif // !(REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)\n"
 
   return code
 

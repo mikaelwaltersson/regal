@@ -7,7 +7,7 @@ include build/common.inc
 
 # Not supported for Emscripten - Revisit
 
-ifeq ($(filter emscripten% nacl-pnacl,$(SYSTEM)),)
+ifeq ($(filter emscripten% wasi% nacl-pnacl,$(SYSTEM)),)
 
 include build/regaltest.inc
 

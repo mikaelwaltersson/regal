@@ -7,7 +7,7 @@ include build/common.inc
 
 # Not supported for NaCL or emscripten - Revisit
 
-ifeq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifeq ($(filter nacl% emscripten% wasi%,$(SYSTEM)),)
 
 #
 # tiger

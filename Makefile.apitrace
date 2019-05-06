@@ -9,7 +9,7 @@ include build/apitrace.inc
 
 # Not supported for NaCL or emscripten, currently
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter nacl% emscripten% wasi%,$(SYSTEM)),)
 APITRACE.STATIC :=
 APITRACE.SHARED :=
 endif

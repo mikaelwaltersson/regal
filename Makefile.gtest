@@ -5,7 +5,7 @@ MAKEFILE_GTEST_INCLUDED := 1
 
 include build/common.inc
 
-ifeq ($(filter emscripten%,$(SYSTEM)),)
+ifeq ($(filter emscripten% wasi%,$(SYSTEM)),)
 
 #
 # googletest + googlemock

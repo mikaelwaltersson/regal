@@ -228,7 +228,7 @@ void InitDispatchTableStaticEGL(DispatchTableGlobal &tbl)
   tbl.reglSwapInterval = ::eglSwapInterval;
   tbl.reglWaitClient = ::eglWaitClient;
 
-#if !REGAL_SYS_EMSCRIPTEN
+#if !(REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
   tbl.reglQuerySurfacePointerANGLE = ::eglQuerySurfacePointerANGLE;
   tbl.reglClientWaitSyncKHR = ::eglClientWaitSyncKHR;
   tbl.reglCreateSyncKHR = ::eglCreateSyncKHR;
@@ -258,7 +258,7 @@ void InitDispatchTableStaticEGL(DispatchTableGlobal &tbl)
   tbl.reglSignalSyncNV = ::eglSignalSyncNV;
   tbl.reglGetSystemTimeFrequencyNV = ::eglGetSystemTimeFrequencyNV;
   tbl.reglGetSystemTimeNV = ::eglGetSystemTimeNV;
-#endif // !REGAL_SYS_EMSCRIPTEN
+#endif // !(REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
 
 }
 

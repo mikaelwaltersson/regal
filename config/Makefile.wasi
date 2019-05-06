@@ -1,0 +1,21 @@
+NAME = $(REGAL_NAME)
+
+WASI_SDK_BIN ?= /opt/wasi-sdk/bin
+
+CC     := $(WASI_SDK_BIN)/clang
+CXX    := $(WASI_SDK_BIN)/clang++
+LD     := $(WASI_SDK_BIN)/wasm-ld
+AR     := $(WASI_SDK_BIN)/llvm-ar
+RANLIB := $(WASI_SDK_BIN)/llvm-ranlib
+
+OBJDUMP := /bin/false
+STRIP :=
+LN :=
+
+BIN.SUFFIX = .wasm
+
+CFLAGS.EXTRA   = -DWASI=1 -Iinclude/wasi/stubs -fno-exceptions
+CFLAGS.DEBUG   = -O2
+CFLAGS.RELEASE = -O2
+
+LIB.STATIC = lib$(NAME).a

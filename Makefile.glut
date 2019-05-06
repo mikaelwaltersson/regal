@@ -9,7 +9,7 @@ include build/glut.inc
 
 # Not supported for Mac or emscripten
 
-ifneq ($(filter darwin% emscripten%,$(SYSTEM)),)
+ifneq ($(filter darwin% emscripten% wasi%,$(SYSTEM)),)
 GLUT.STATIC :=
 GLUT.SHARED :=
 endif

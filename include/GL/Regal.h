@@ -100,6 +100,24 @@
 #   define REGAL_NAMESPACE 1
 #  endif
 # endif
+#elif defined(WASI)
+# ifndef REGAL_SYS_WASI
+#  define REGAL_SYS_WASI 1
+# endif
+# ifndef REGAL_SYS_EGL
+#  define REGAL_SYS_EGL 1
+# endif
+# ifndef REGAL_SYS_ES2
+#  define REGAL_SYS_ES2 1
+# endif
+# ifndef REGAL_SYS_WASI_STATIC
+#  define REGAL_SYS_WASI_STATIC 1
+# endif
+# if REGAL_SYS_WASI_STATIC
+#  ifndef REGAL_NAMESPACE
+#   define REGAL_NAMESPACE 1
+#  endif
+# endif
 #elif !defined(REGAL_SYS_PPAPI) || !REGAL_SYS_PPAPI
 # ifndef REGAL_SYS_X11
 #  define REGAL_SYS_X11 1

@@ -11,7 +11,7 @@ ifneq ($(filter emscripten%,$(SYSTEM)),)
 DREAMTORUS_STATIC.EXE := dreamtorus_static.html
 endif
 
-ifneq ($(filter nacl%,$(SYSTEM)),)
+ifneq ($(filter nacl% wasi%,$(SYSTEM)),)
 DREAMTORUS_STATIC.EXE :=
 endif
 

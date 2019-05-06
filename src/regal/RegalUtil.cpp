@@ -464,6 +464,13 @@ void *GetProcAddress(const char *entry)
     return eglGetProcAddress(entry);
 }
 
+#elif REGAL_SYS_WASI
+
+void *GetProcAddress(const char *entry)
+{
+    return NULL; // TODO: Do we need this in WASI?
+}
+
 #elif REGAL_SYS_GLX || REGAL_SYS_EGL
 
 // General purpose GetProcAddress for GLX or EGL,

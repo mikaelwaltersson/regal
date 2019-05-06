@@ -75,7 +75,7 @@
 
 // Defaults for Emscripten static mode
 
-#if REGAL_SYS_EMSCRIPTEN_STATIC
+#if (REGAL_SYS_EMSCRIPTEN_STATIC || REGAL_SYS_WASI_STATIC)
 # ifndef REGAL_DRIVER
 #  define REGAL_DRIVER 1
 # endif
@@ -209,7 +209,7 @@
 // Statistics gathering disabled in release mode, or embedded
 
 #ifndef REGAL_STATISTICS
-# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_SYS_EMSCRIPTEN || REGAL_WRANGLER
+# if defined(NDEBUG) || REGAL_SYS_IOS || REGAL_SYS_PPAPI || REGAL_SYS_ANDROID || REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI || REGAL_WRANGLER
 #  define REGAL_STATISTICS 0
 # else
 #  define REGAL_STATISTICS 1

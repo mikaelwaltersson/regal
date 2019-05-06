@@ -895,14 +895,14 @@ ContextInfo::init(const RegalContext &context)
   }
   #endif
 
-  #if REGAL_SYS_EMSCRIPTEN
+  #if (REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
   webgl = starts_with(version, "WebGL");
   #endif
 
   // For Mesa3D EGL/ES 2.0 on desktop Linux the version string doesn't start with
   // "OpenGL ES" Is that a Mesa3D bug? Perhaps...
 
-  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID && !REGAL_SYS_EMSCRIPTEN
+  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && !REGAL_SYS_ANDROID && !REGAL_SYS_EMSCRIPTEN && !REGAL_SYS_WASI
   if (Regal::Config::sysEGL)
   {
     es1 = false;
@@ -913,7 +913,7 @@ ContextInfo::init(const RegalContext &context)
   }
   #endif
 
-  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && REGAL_SYS_EMSCRIPTEN
+  #if REGAL_SYS_ES2 && REGAL_SYS_EGL && (REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
   {
     es1 = false;
     es2 = true;

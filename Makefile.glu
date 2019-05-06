@@ -13,7 +13,7 @@ include build/glu.inc
 
 # Not supported for NaCL or emscripten, yet
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter nacl% emscripten% wasi%,$(SYSTEM)),)
 GLU.SHARED     :=
 endif
 

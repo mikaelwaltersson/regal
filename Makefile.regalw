@@ -20,7 +20,7 @@ REGALW.STATIC :=
 
 # Shared library target not currently supported for NaCL or emscripten
 
-ifneq ($(filter nacl% emscripten%,$(SYSTEM)),)
+ifneq ($(filter nacl% emscripten% wasi%,$(SYSTEM)),)
 REGALW.SHARED :=
 endif
 

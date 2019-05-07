@@ -14,7 +14,7 @@ LN :=
 
 BIN.SUFFIX = .wasm
 
-CFLAGS.EXTRA   = -DWASI=1 -Iinclude/wasi/stubs -fno-exceptions
+CFLAGS.EXTRA   = -DWASI=1 -Iinclude/wasi-stubs -fno-exceptions
 CFLAGS.DEBUG   = -O2
 CFLAGS.RELEASE = -O2
 

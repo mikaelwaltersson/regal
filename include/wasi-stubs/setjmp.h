@@ -1,8 +1,9 @@
 #ifndef _SETJMP_H
 #define _SETJMP_H	1
 
-typedef struct { } jmp_buf;
-typedef struct { } sigjmp_buf;
+#define _JBLEN 1
+typedef int jmp_buf[_JBLEN];
+typedef int sigjmp_buf[_JBLEN + 1];
 
 #ifdef __cplusplus
 extern "C" {

@@ -2,41 +2,62 @@
 #ifndef _PTHREAD_H
 #define _PTHREAD_H	1
 
-typedef struct { } pthread_attr_t;
-typedef struct { } pthread_cond_t;
-typedef struct { } pthread_condattr_t;
-typedef struct { } pthread_key_t;
-typedef struct { } pthread_mutex_t;
-typedef struct { } pthread_mutexattr_t;
-typedef struct { } pthread_once_t;
-typedef struct { } pthread_rwlock_t;
-typedef struct { } pthread_rwlockattr_t;
-typedef struct { } pthread_t;
+typedef unsigned int __pthread_size_t;
 
-#define PTHREAD_CANCEL_ASYNCHRONOUS 0
-#define PTHREAD_CANCEL_ENABLE 0
-#define PTHREAD_CANCEL_DEFERRED 0
-#define PTHREAD_CANCEL_DISABLE 0
-#define PTHREAD_CANCELED 0
-#define PTHREAD_COND_INITIALIZER 0
-#define PTHREAD_CREATE_DETACHED 0
-#define PTHREAD_CREATE_JOINABLE 0
-#define PTHREAD_EXPLICIT_SCHED 0
-#define PTHREAD_INHERIT_SCHED 0
-#define PTHREAD_MUTEX_DEFAULT 0
-#define PTHREAD_MUTEX_ERRORCHECK 0
-#define PTHREAD_MUTEX_NORMAL 0
-#define PTHREAD_MUTEX_INITIALIZER 0
-#define PTHREAD_MUTEX_RECURSIVE 0
-#define PTHREAD_ONCE_INIT 0
-#define PTHREAD_PRIO_INHERIT 0
-#define PTHREAD_PRIO_NONE 0
-#define PTHREAD_PRIO_PROTECT 0
-#define PTHREAD_PROCESS_SHARED 0
-#define PTHREAD_PROCESS_PRIVATE 0
-#define PTHREAD_RWLOCK_INITIALIZER 0
-#define PTHREAD_SCOPE_PROCESS 0
-#define PTHREAD_SCOPE_SYSTEM 0
+typedef struct { long __sig; char __opaque[8]; } pthread_attr_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_cond_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_condattr_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_key_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_mutex_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_mutexattr_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_once_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_rwlock_t;
+typedef struct { long __sig; char __opaque[8]; } pthread_rwlockattr_t;
+typedef unsigned long pthread_t;
+
+#define _PTHREAD_COND_SIG_init		 0x3CB0B1BB
+#define _PTHREAD_ONCE_SIG_init		 0x30B1BCBA
+#define _PTHREAD_RWLOCK_SIG_init     0x2DA8B3B4
+
+#define PTHREAD_CANCEL_ENABLE        0x01  /* Cancel takes place at next cancellation point */
+#define PTHREAD_CANCEL_DISABLE       0x00  /* Cancel postponed */
+#define PTHREAD_CANCEL_DEFERRED      0x02  /* Cancel waits until cancellation point */
+#define PTHREAD_CANCEL_ASYNCHRONOUS  0x00  /* Cancel occurs immediately */
+
+#define PTHREAD_CANCEL_ENABLE        0x01  /* Cancel takes place at next cancellation point */
+#define PTHREAD_CANCEL_DISABLE       0x00  /* Cancel postponed */
+#define PTHREAD_CANCEL_DEFERRED      0x02  /* Cancel waits until cancellation point */
+#define PTHREAD_CANCEL_ASYNCHRONOUS  0x00  /* Cancel occurs immediately */
+
+#define PTHREAD_CANCELED	         ((void *) 1)
+
+#define PTHREAD_COND_INITIALIZER     0
+
+#define PTHREAD_CREATE_JOINABLE      1
+#define PTHREAD_CREATE_DETACHED      2
+
+#define PTHREAD_INHERIT_SCHED        1
+#define PTHREAD_EXPLICIT_SCHED       2
+
+#define PTHREAD_MUTEX_NORMAL		0
+#define PTHREAD_MUTEX_ERRORCHECK	1
+#define PTHREAD_MUTEX_RECURSIVE		2
+#define PTHREAD_MUTEX_DEFAULT		PTHREAD_MUTEX_NORMAL
+
+#define PTHREAD_MUTEX_INITIALIZER   {_PTHREAD_MUTEX_SIG_init, {0}}
+
+#define PTHREAD_ONCE_INIT           {_PTHREAD_ONCE_SIG_init, {0}}
+#define PTHREAD_PRIO_NONE           0
+#define PTHREAD_PRIO_INHERIT        1
+#define PTHREAD_PRIO_PROTECT        2
+
+#define PTHREAD_PROCESS_SHARED      1
+#define PTHREAD_PROCESS_PRIVATE     2
+
+#define PTHREAD_RWLOCK_INITIALIZER  {_PTHREAD_RWLOCK_SIG_init, {0}}
+
+#define PTHREAD_SCOPE_SYSTEM        1
+#define PTHREAD_SCOPE_PROCESS       2
 
 #ifdef __cplusplus
 extern "C" {
@@ -44,22 +65,22 @@ extern "C" {
 
 int pthread_attr_destroy(pthread_attr_t *);
 int pthread_attr_getdetachstate(const pthread_attr_t *, int *);
-int pthread_attr_getguardsize(const pthread_attr_t *, size_t *);
+int pthread_attr_getguardsize(const pthread_attr_t *, __pthread_size_t *);
 int pthread_attr_getinheritsched(const pthread_attr_t *, int *);
 int pthread_attr_getschedparam(const pthread_attr_t *, struct sched_param *);
 int pthread_attr_getschedpolicy(const pthread_attr_t *, int *);
 int pthread_attr_getscope(const pthread_attr_t *, int *);
 int pthread_attr_getstackaddr(const pthread_attr_t *, void **);
-int pthread_attr_getstacksize(const pthread_attr_t *, size_t *);
+int pthread_attr_getstacksize(const pthread_attr_t *, __pthread_size_t *);
 int pthread_attr_init(pthread_attr_t *);
 int pthread_attr_setdetachstate(pthread_attr_t *, int);
-int pthread_attr_setguardsize(pthread_attr_t *, size_t);
+int pthread_attr_setguardsize(pthread_attr_t *, __pthread_size_t);
 int pthread_attr_setinheritsched(pthread_attr_t *, int);
 int pthread_attr_setschedparam(pthread_attr_t *, const struct sched_param *);
 int pthread_attr_setschedpolicy(pthread_attr_t *, int);
 int pthread_attr_setscope(pthread_attr_t *, int);
 int pthread_attr_setstackaddr(pthread_attr_t *, void *);
-int pthread_attr_setstacksize(pthread_attr_t *, size_t);
+int pthread_attr_setstacksize(pthread_attr_t *, __pthread_size_t);
 int pthread_cancel(pthread_t);
 void pthread_cleanup_push(void (*routine)(void*), void *arg);
 void pthread_cleanup_pop(int);

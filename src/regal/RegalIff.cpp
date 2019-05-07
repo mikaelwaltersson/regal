@@ -2375,7 +2375,7 @@ void Iff::InitImmediate(RegalContext &ctx)
   tbl.glGenBuffers( 1, & immVboElement );
   tbl.glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, immVboElement );
 
-#if (REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
+#if (REGAL_SYS_EMSCRIPTEN || REGAL_SYS_WASI)
   // We need this to be an allocated buffer for WebGL, because a dangling VertexAttribPointer
   // doesn't work.  XXX -- this might be a Firefox bug, check?
   tbl.glBufferData( GL_ARRAY_BUFFER, sizeof( immArray ), NULL, GL_STATIC_DRAW );

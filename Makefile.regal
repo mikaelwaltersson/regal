@@ -58,6 +58,11 @@ ifeq ($(filter nacl% emscripten% wasi%,$(SYSTEM)),)
 REGAL.SRCS           += src/civetweb/civetweb.c
 endif
 
+ifeq ($(filter-out wasi%, $(SYSTEM)),)
+REGAL.SRCS           += src/wasi-stubs/setjmp.c
+REGAL.SRCS           += src/wasi-stubs/pthread.c
+endif
+
 ifeq ($(filter -DREGAL_NO_MD5%,$(CFLAGS)),)
 REGAL.SRCS           += src/md5/src/md5.c
 endif
@@ -342,6 +347,10 @@ tmp/$(SYSTEM)/regal/static/%.o: src/civetweb/%.c $(REGAL.HEADERS)
 tmp/$(SYSTEM)/regal/shared/%.o: src/civetweb/%.c $(REGAL.HEADERS)
 	@mkdir -p $(dir $@)
 	$(LOG_CC)$(CCACHE) $(CC) $(REGAL.CFLAGS) $(CFLAGS) $(PICFLAG) $(CFLAGS.SO) $(REGAL.INCLUDE) -o $@ -c $<
+
+tmp/$(SYSTEM)/regal/static/%.o: src/wasi-stubs/%.c $(REGAL.HEADERS)
+	@mkdir -p $(dir $@)
+	$(LOG_CC)$(CCACHE) $(CC) $(REGAL.CFLAGS) $(CFLAGS) $(CFLAGS.SO) $(REGAL.INCLUDE) -o $@ -c $<
 
 tmp/$(SYSTEM)/regal/static/%.o: src/md5/src/%.c $(REGAL.HEADERS)
 	@mkdir -p $(dir $@)

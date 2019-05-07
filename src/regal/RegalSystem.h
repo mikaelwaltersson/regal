@@ -104,9 +104,6 @@
 # ifndef REGAL_SYS_WASI
 #  define REGAL_SYS_WASI 1
 # endif
-# ifndef REGAL_SYS_EGL
-#  define REGAL_SYS_EGL 1
-# endif
 # ifndef REGAL_SYS_ES2
 #  define REGAL_SYS_ES2 1
 # endif

@@ -1,6 +1,8 @@
 NAME = $(REGAL_NAME)
 
-WASI_SDK_BIN ?= /opt/wasi-sdk/bin
+WASI_SDK     ?= $(HOME)/wasi-sdk-10.0
+WASI_SDK_BIN ?= $(WASI_SDK)/bin
+WASI_SYSROOT ?= $(WASI_SDK)/share/wasi-sysroot
 
 CC     := $(WASI_SDK_BIN)/clang
 CXX    := $(WASI_SDK_BIN)/clang++
@@ -14,7 +16,7 @@ LN :=
 
 BIN.SUFFIX = .wasm
 
-CFLAGS.EXTRA   = -DWASI=1 -Iinclude/wasi-stubs -fno-exceptions
+CFLAGS.EXTRA   = -DWASI=1 --sysroot=$(WASI_SYSROOT) -Iinclude/wasi-stubs -fno-exceptions
 CFLAGS.DEBUG   = -O2
 CFLAGS.RELEASE = -O2
 
